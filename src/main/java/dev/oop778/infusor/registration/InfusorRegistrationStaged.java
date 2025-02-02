@@ -9,13 +9,13 @@ public interface InfusorRegistrationStaged<T, RETURN> {
     CustomStage<T, RETURN> custom();
 
     interface FactoryStage<T, RETURN> {
-        BuildStage<T, RETURN> provider(InfusableObjectProvider<T> factory);
+        BuildStage<T, RETURN> provider(InfusableObjectProvider<? super T> factory);
     }
 
     interface BuildStage<T, RETURN> {
         BuildStage<T, RETURN> filtered(InfusorRegistrationNodeFilter filter);
 
-        RETURN complete();
+        RETURN done();
     }
 
     interface SingletonStage<T, RETURN> {
@@ -23,14 +23,14 @@ public interface InfusorRegistrationStaged<T, RETURN> {
 
         BuildStage<T, RETURN> eagerProvidedInfused(T object);
 
-        BuildStage<T, RETURN> eager(Class<T> clazz);
+        BuildStage<T, RETURN> eager(Class<? extends T> clazz);
 
-        BuildStage<T, RETURN> lazy(Class<T> clazz);
+        BuildStage<T, RETURN> lazy(Class<? extends T> clazz);
 
-        BuildStage<T, RETURN> lazy(InfusableObjectProvider<T> factory);
+        BuildStage<T, RETURN> lazy(InfusableObjectProvider<? super T> factory);
     }
 
     interface CustomStage<T, RETURN> {
-        BuildStage<T, RETURN> provider(InfusableObjectProvider<T> factory);
+        BuildStage<T, RETURN> provider(InfusableObjectProvider<? super T> factory);
     }
 }

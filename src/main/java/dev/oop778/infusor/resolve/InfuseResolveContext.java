@@ -17,4 +17,8 @@ public record InfuseResolveContext<T>(TypeToken<T> typeToken, Infusor requesting
     public InfuseResolveContext<T> withLocation(ResolveLocation location) {
         return this.toBuilder().location(location).build();
     }
+
+    public InfuseResolveContext<T> withInfusor(Infusor infusor) {
+        return this.toBuilder().requestingInfusor(infusor).build();
+    }
 }
